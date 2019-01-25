@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "GGJ2019 Game",
   "main": "main.js",
-  "dependencies": {},
+  "dependencies": {
+    "p5": "^0.7.3"
+  },
   "devDependencies": {
     "electron": "^4.0.2"
   },
