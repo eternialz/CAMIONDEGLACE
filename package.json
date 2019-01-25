@@ -1,0 +1,25 @@
+{
+  "name": "camiondeglace-ggj",
+  "version": "1.0.0",
+  "description": "GGJ2019 Game",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^4.0.2"
+  },
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eternialz/CAMIONDEGLACE.git"
+  },
+  "keywords": [
+    "GGJ"
+  ],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/eternialz/CAMIONDEGLACE/issues"
+  },
+  "homepage": "https://github.com/eternialz/CAMIONDEGLACE#readme"
+}
