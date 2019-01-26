@@ -1,5 +1,6 @@
 import { TextHistoryService } from "../services/text_history_service";
 import { Game } from "../game";
+const remote = require('electron').remote;
 
 export default class UserInterfaceController extends Stimulus.Controller {
     static targets = [ "command", "output" ];
@@ -21,6 +22,8 @@ export default class UserInterfaceController extends Stimulus.Controller {
 
     refresh() {
         this.outputTarget.innerHTML = TextHistoryService.html;
+        // auto scroll to new message
+        this.outputTarget.scrollTop = this.outputTarget.scrollHeight;
         Game.nextTick();
     }
 
@@ -32,9 +35,15 @@ export default class UserInterfaceController extends Stimulus.Controller {
     
     keyUp(e) {
         if (e.keyCode === 13) {
-            Game.currentEvent.step.nextInput(this.commandTarget.value);
-            TextHistoryService.addText(this.commandTarget.value, 'hero');
-            this.commandTarget.value = "";
+            if (this.commandTarget.value == "quitter") {
+                const window = remote.getCurrentWindow();
+                window.close();
+            }
+            else {
+                Game.currentEvent.step.nextInput(this.commandTarget.value);
+                TextHistoryService.addText(this.commandTarget.value, 'hero');
+                this.commandTarget.value = "";
+            }
         }
     }
 }
