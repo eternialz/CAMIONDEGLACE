@@ -3,6 +3,7 @@ import { TextHistoryService } from "../services/text_history_service";
 export default class UserInterfaceController extends Stimulus.Controller {
     static targets = [ "command", "output" ];
     combatMode = false;
+    updateTimer = null;
 
     connect() { 
         this.updateTimer = setInterval(() => {
@@ -17,7 +18,7 @@ export default class UserInterfaceController extends Stimulus.Controller {
     }
 
     refresh() {
-        this.outputTarget.innerHTML = TextHistoryService.value;
+        this.outputTarget.innerHTML = TextHistoryService.html;
     }
 
     keyDown(e) {
@@ -35,15 +36,10 @@ export default class UserInterfaceController extends Stimulus.Controller {
 
     nextInput(text) {
         if (text == "vim") {
-            this.addText("Welcome in vim room!");
+            TextHistoryService.addText("Welcome in vim room!");
         }
         else if (text == "right") {
-            this.addText("Right", false);
+            TextHistoryService.addText("Right", false);
         }
-    }
-
-    addText(text, left = true) {
-        TextHistoryService.addText(text, left);
-        this.outputTarget.innerHTML = TextHistoryService.html;
     }
 }
