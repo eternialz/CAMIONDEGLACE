@@ -8,7 +8,7 @@ export class AttackStep extends Step {
     }
 
     display() {
-        TextHistoryService.addText(`Entrez ${this.random} pour attaquer!`, left);
+        TextHistoryService.addText(`Entrez ${this.random} pour attaquer!`);
     }
 
     nextInput(value) {

@@ -20,7 +20,6 @@ export default class UserInterfaceController extends Stimulus.Controller {
     }
 
     refresh() {
-        //console.log("refresh");
         this.outputTarget.innerHTML = TextHistoryService.html;
         Game.nextTick();
     }
@@ -33,9 +32,8 @@ export default class UserInterfaceController extends Stimulus.Controller {
     
     keyUp(e) {
         if (e.keyCode === 13) {
-            console.log(Game.currentEvent.step);
             Game.currentEvent.step.nextInput(this.commandTarget.value);
-            TextHistoryService.addText(this.commandTarget.value, false);
+            TextHistoryService.addText(this.commandTarget.value, 'hero');
             this.commandTarget.value = "";
         }
     }

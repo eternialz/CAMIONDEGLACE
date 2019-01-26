@@ -6,7 +6,7 @@ export class DisplayTextStep extends Step {
         super(message, false, final, nextStep);
     }
 
-    display(left = true) {
-        TextHistoryService.addText(this.message, left);
+    display() {
+        TextHistoryService.addText(this.message);
     }
 }
