@@ -1,4 +1,5 @@
 import HomeController from "./controllers/home_controller";
+import UserInterfaceController from "./controllers/user_interface_controller";
 
 const application = Stimulus.Application.start();
         
@@ -8,3 +9,4 @@ static get targets() {
 }});
 
 application.register("home", HomeController);
+application.register("user-interface", UserInterfaceController);

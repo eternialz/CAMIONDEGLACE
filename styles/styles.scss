@@ -1,0 +1,38 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+#text-zone {
+    height:30vh;
+}
+
+.input-zone {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
+
+input[name="text-input"] {
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.text-right {
+    text-align: right;
+    margin: 0;
+}
+
+.text-left {
+    text-align: left;
+    margin: 0;
+}

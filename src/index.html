@@ -7,14 +7,18 @@
         <script src="./node_modules/p5/lib/addons/p5.sound.js"></script> -->
         <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
         <script src="./stimulus.js"></script>
+        <link rel="stylesheet" type="text/css" href="./styles/styles.css">
     </head>
     <body>
         <main>
-            <div data-controller="home">
-                <span data-target="home.output"></span>
+            <section id="text-zone" data-controller="user-interface" data-content-loader-refresh-interval="1000">
+                <div id="text-output" data-target="user-interface.output">
 
-                <button data-action="click->home#click"></button>
-            </div>
+                </div>
+                <div class="input-zone">
+                    <input data-target="user-interface.command" type="text" name="text-input" data-action="keyup->user-interface#keyUp keydown->user-interface#keyDown" />
+                </div>
+            </section>
         </main>  
     </body>
 </html>
