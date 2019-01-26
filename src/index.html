@@ -7,6 +7,7 @@
         <script src="./node_modules/p5/lib/addons/p5.sound.js"></script> -->
         <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
         <script src="./stimulus.js"></script>
+        <link rel="stylesheet" type="text/css" href="./styles/styles.css">
     </head>
     <body>
         <main>
@@ -15,6 +16,14 @@
 
                 <button data-action="click->home#click"></button>
             </div>
+            <section id="text-zone">
+                <div id="text-output">
+
+                </div>
+                <div class="input-zone" data-controller="input">
+                    <input data-target="input.command" type="text" name="text-input" data-action="keyup->input#keyUp"/>
+                </div>
+            </section>
         </main>  
     </body>
 </html>
