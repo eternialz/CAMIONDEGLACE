@@ -1,4 +1,4 @@
-class Event {
+export class Event {
     constructor(initialStep) {
         this.step = initlalStep;
         this.step.display();

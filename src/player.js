@@ -1,9 +1,11 @@
 export const Player = {
-    happiness: 100,
+    maxHappiness: 100,
+    minHappiness: 0,
+    happiness: Player.maxHappiness,
     gainHappiness: (gain) => {
-        Player.happiness = (Player.happiness + gain > 100) ? 100 : Player.happiness + gain;
+        Player.happiness = (Player.happiness + gain > Player.maxHappiness) ? Player.maxHappiness : Player.happiness + gain;
     },
     loseHappiness: (loss) => {
-        Player.happiness = (Player.happiness - loss < 0) ? 0 : Player.happiness - loss;
+        Player.happiness = (Player.happiness - loss < Player.minHappiness) ? Player.minHappiness : Player.happiness - loss;
     }
 };

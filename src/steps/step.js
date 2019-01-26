@@ -1,4 +1,4 @@
-class Step {
+export class Step {
     constructor(message, userAction, final, nextSteps) {
         this.message = message;
         this.requireUserAction = userAction;

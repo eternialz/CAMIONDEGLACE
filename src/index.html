@@ -11,12 +11,7 @@
     </head>
     <body>
         <main>
-            <div data-controller="home">
-                <span data-target="home.output"></span>
-
-                <button data-action="click->home#click"></button>
-            </div>
-            <section id="text-zone" data-controller="user-interface">
+            <section id="text-zone" data-controller="user-interface" data-content-loader-refresh-interval="1000">
                 <div id="text-output" data-target="user-interface.output">
 
                 </div>
