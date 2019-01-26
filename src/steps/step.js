@@ -8,12 +8,12 @@ export class Step {
     display() {
     }
 
-    nextStep(steps, possiblesStepsIdx) {
+    nextStep() {
         if (this.isFinal) {
             return null;
         }
-        if (possiblesStepsIdx.length == 1) {
-            return steps[possiblesStepsIdx[0]];
+        else if (this.nextSteps.length == 1) {
+            return this.nextSteps[0];
         }
         const canEnterSteps = possiblesStepsIdx.map(el => steps[el]).filter(step => step.canEnter(null));
         if (canEnterSteps.length == 1) {
