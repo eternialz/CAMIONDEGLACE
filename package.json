@@ -2,15 +2,27 @@
   "name": "camiondeglace-ggj",
   "version": "1.0.0",
   "description": "GGJ2019 Game",
+  "directories": {
+    "output": "lib/"
+  },
   "main": "main.js",
   "dependencies": {
-    "p5": "^0.7.3"
+    "@stimulus/polyfills": "^1.1.1",
+    "p5": "^0.7.3",
+    "stimulus": "^1.1.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
     "electron": "^4.0.2"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "babel src -d lib --copy-files && electron lib/main.js",
+    "build": "babel src -d lib"
   },
   "repository": {
     "type": "git",
