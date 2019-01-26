@@ -1,14 +1,16 @@
 import { TextHistoryService } from "../services/text_history_service";
+import { Game } from "../game";
 
 export default class UserInterfaceController extends Stimulus.Controller {
     static targets = [ "command", "output" ];
     combatMode = false;
     updateTimer = null;
 
-    connect() { 
+    connect() {
+        Game.init();
         this.updateTimer = setInterval(() => {
             this.refresh();
-        }, this.data.get("refreshInterval"));
+        }, 1000);
     }
 
     disconnect() {
@@ -18,7 +20,9 @@ export default class UserInterfaceController extends Stimulus.Controller {
     }
 
     refresh() {
+        //console.log("refresh");
         this.outputTarget.innerHTML = TextHistoryService.html;
+        Game.nextTick();
     }
 
     keyDown(e) {
@@ -29,17 +33,10 @@ export default class UserInterfaceController extends Stimulus.Controller {
     
     keyUp(e) {
         if (e.keyCode === 13) {
-            this.nextInput(this.commandTarget.value);
+            console.log(Game.currentEvent.step);
+            Game.currentEvent.step.nextInput(this.commandTarget.value);
+            TextHistoryService.addText(this.commandTarget.value, false);
             this.commandTarget.value = "";
-        }
-    }
-
-    nextInput(text) {
-        if (text == "vim") {
-            TextHistoryService.addText("Welcome in vim room!");
-        }
-        else if (text == "right") {
-            TextHistoryService.addText("Right", false);
         }
     }
 }

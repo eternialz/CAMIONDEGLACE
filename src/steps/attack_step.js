@@ -2,8 +2,8 @@ import { Step } from "./step";
 import { StringHelper } from "../helpers/string-helper";
 
 export class AttackStep extends Step {
-    constructor(final, nextStep) {
-        super(true, final, [nextStep]);
+    constructor(message, final) {
+        super(message, true, final);
         this.random = StringHelper.randomString();
     }
 
@@ -11,7 +11,7 @@ export class AttackStep extends Step {
         TextHistoryService.addText(`Entrez ${this.random} pour attaquer!`, left);
     }
 
-    onInput(userInput) {
+    nextInput(value) {
         // TODO:
     }
 }

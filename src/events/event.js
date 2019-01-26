@@ -1,15 +1,14 @@
 export class Event {
-    constructor(steps, possibleNextSteps) {
+    constructor(steps, background) {
         this.steps = steps;
-        this.possibleNextSteps = possibleNextSteps;
         this.step = this.steps[0];
-        this.step.display();
         this.isFinished = false;
+        this.background = background;
     }
 
     nextStep() {
-        if (!this.isFinished) {
-            this.step = this.step.nextStep(this.steps, this.possibleNextSteps[this.currentStepIndex]);
+        if (!this.isFinished && this.step.nextStep) {
+            this.step = Object.create(this.steps[this.step.nextStep]);
             this.step.display()
             if (this.step.isFinal) {
                 this.isFinished = true;

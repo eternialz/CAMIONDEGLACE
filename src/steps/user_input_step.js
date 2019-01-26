@@ -1,16 +1,14 @@
-import { Step } from "./step";
+import { DisplayTextStep } from "./display_text_step";
 
-export class UserInputStep extends Step {
-    constructor(message, final, nextStep, responseAction) {
-        super(message, true, final, [nextStep]);
+export class UserInputStep extends DisplayTextStep {
+    constructor(message, responseAction) {
+        super(message, false);
+        this.requireUserAction = true;
         this.responseAction = responseAction;
     }
 
-    display() {
+    nextInput(value) {
+        this.nextStep = this.responseAction(value);
 
-    }
-
-    onInput(userInput) {
-        this.responseAction(userInput);
     }
 }
