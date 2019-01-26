@@ -2,6 +2,7 @@ import { ArrayHelper } from "./helpers/array-helper";
 import { Event } from "./events/event";
 import { DisplayTextStep } from "./steps/display_text_step";
 import { UserInputStep } from "./steps/user_input_step";
+import { BackgroundService } from "./services/background_service";
 
 export const Game = {
     allEvents:  [],
@@ -17,7 +18,7 @@ export const Game = {
             return 4;
         }),
         new DisplayTextStep("C'est partie!", true)
-    ], "./assets/mountain_volcano.png"),
+    ], "mountain_volcano"),
     vimEvent: new Event([
         new DisplayTextStep("Bienvenue dans la maison de vim.", false, 1),
         new DisplayTextStep("Ho non, la porte se ferme ! Te voila piegé !", false, 2),
@@ -28,7 +29,7 @@ export const Game = {
             return 2;
         }),
         new DisplayTextStep("Bravo, tu es sortie!", true)
-    ], "../.."),
+    ], "vim"),
     endEvent: new Event([
         new DisplayTextStep("Félicitation", false, 1),
         new DisplayTextStep("Vous êtes de retour à la maison", false, 2),
@@ -59,13 +60,14 @@ export const Game = {
                 return 2;
             }),
             new DisplayTextStep("Bravo, tu es sortie!", true)
-        ], "../.."));
+        ], "vim"));
     },
 
     pickCurrEvents: () => {
         let shuffledEvents = ArrayHelper.shuffle(Game.allEvents);
         Game.sessionEvents = shuffledEvents.slice(0, Game.nbEvents);
         Game.currentEvent = Game.startEvent;
+        BackgroundService.name = Game.currentEvent.background;
         Game.currentEvent.step.display();
     },
     nextTick: () => {
@@ -78,6 +80,7 @@ export const Game = {
             else {
                 Game.currentEvent = Game.endEvent;
             }
+            BackgroundService.name = Game.currentEvent.background;
             Game.currentEvent.step.display();
         }
     }
