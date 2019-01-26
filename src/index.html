@@ -6,16 +6,20 @@
         <script src="./node_modules/p5/lib/addons/p5.dom.js"></script>
         <script src="./node_modules/p5/lib/addons/p5.sound.js"></script> -->
         <script src="https://unpkg.com/stimulus/dist/stimulus.umd.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
         <script src="./stimulus.js"></script>
         <link rel="stylesheet" type="text/css" href="./styles/styles.css">
     </head>
     <body>
         <main>
-            <section id="text-zone" data-controller="user-interface">
-                <div id="text-output" data-target="user-interface.output">
+            <section id="scene" data-controller="scene" data-content-loader-refresh-interval="1000">
 
+            </section>
+            <section id="text-zone" data-controller="user-interface" data-content-loader-refresh-interval="1000">
+                <div id="text-output" data-target="user-interface.output">
+                    
                 </div>
-                <div class="input-zone">
+                <div id="text-input">
                     <input data-target="user-interface.command" type="text" name="text-input" data-action="keyup->user-interface#keyUp keydown->user-interface#keyDown" />
                 </div>
             </section>
