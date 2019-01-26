@@ -16,12 +16,12 @@
 
                 <button data-action="click->home#click"></button>
             </div>
-            <section id="text-zone">
-                <div id="text-output">
+            <section id="text-zone" data-controller="user-interface">
+                <div id="text-output" data-target="user-interface.output">
 
                 </div>
-                <div class="input-zone" data-controller="input">
-                    <input data-target="input.command" type="text" name="text-input" data-action="keyup->input#keyUp"/>
+                <div class="input-zone">
+                    <input data-target="user-interface.command" type="text" name="text-input" data-action="keyup->user-interface#keyUp keydown->user-interface#keyDown" />
                 </div>
             </section>
         </main>  
