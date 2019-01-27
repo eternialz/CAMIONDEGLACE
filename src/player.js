@@ -1,12 +1,12 @@
 export const Player = {
     maxHappiness: 100,
     minHappiness: 0,
-    happiness: Player.maxHappiness,
+    happiness: 0,
     maxHealth: 100,
-    health: Player.maxHealth,
+    health: 0,
     baseDamage: 20,
-    damage: Player.baseDamage,
-    reset: () => {
+    damage: 0,
+    init: () => {
         Player.happiness = Player.maxHappiness;
         Player.health = Player.maxHealth;
         Player.damage = Player.baseDamage;
@@ -29,6 +29,6 @@ export const Player = {
         Player.damage += 5;
     },
     isDead: () => {
-        return Player.health == 0;
+        return Player.health <= 0;
     },
 };

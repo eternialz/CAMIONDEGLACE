@@ -1,14 +1,16 @@
-import { TextHistoryService } from "../services/text_history_service";
-import { Game } from "../game";
+import { TextHistoryService } from '../services/text_history_service';
+import { Game } from '../game';
+import { Player } from '../player';
 const remote = require('electron').remote;
 
 export default class UserInterfaceController extends Stimulus.Controller {
-    static targets = [ "command", "output" ];
+    static targets = ['command', 'output'];
     combatMode = false;
     updateTimer = null;
 
     connect() {
         Game.init();
+        Player.init();
         this.updateTimer = setInterval(() => {
             this.refresh();
         }, 1000);
@@ -35,17 +37,16 @@ export default class UserInterfaceController extends Stimulus.Controller {
             e.preventDefault();
         }
     }
-    
+
     keyUp(e) {
         if (e.keyCode === 13) {
-            if (this.commandTarget.value == "quitter") {
+            if (this.commandTarget.value == 'quitter') {
                 const window = remote.getCurrentWindow();
                 window.close();
-            }
-            else {
+            } else {
                 Game.currentEvent.step.nextInput(this.commandTarget.value);
                 TextHistoryService.addText(this.commandTarget.value, 'hero');
-                this.commandTarget.value = "";
+                this.commandTarget.value = '';
             }
         }
     }
