@@ -13,12 +13,12 @@ export const Game = {
     allEvents: [],
     startEvent: new Event(
         [
-            new DisplayTextStep('Bienvenue dans le camion de glace.', false, 1),
-            new DisplayTextStep('Quel glace veux-tu ?', false, 2),
-            new DisplayTextStep("Ho non, tu n'as pas vu le temps passer, il faut maintenant très tard", false, 3),
-            new DisplayTextStep('Il va falloir maintenant rentrer à la maison', false, 4),
+            new DisplayTextStep('Bienvenue au Camion de Glace.', false, 1),
+            new DisplayTextStep('Quelle glace veux-tu ?', false, 2),
+            new DisplayTextStep("Ho non, tu n'as pas vu le temps passer, il est très tard", false, 3),
+            new DisplayTextStep('Il va falloir maintenant rentrer à la maison!', false, 4),
             new UserInputStep(
-                'Ce jeu est 100% textuel. Entrez <em>jouer</em> pour commencer, <em>quitter</em> si vous souhaitez quitter.',
+                'Ce jeu est complétement textuel. Entrez <em>jouer</em> pour commencer, <em>quitter</em> si vous souhaitez quitter.',
                 {},
                 resp => {
                     if (resp == 'jouer') {
@@ -27,23 +27,23 @@ export const Game = {
                     return 4;
                 }
             ),
-            new DisplayTextStep("C'est parti!", true),
+            new DisplayTextStep('En route!', true),
         ],
-        'mountain_volcano',
+        'title-screen',
         new PNJ(''),
         './assets/music/purple_planet_music_-_hope_-_dream_the_dream.mp3'
     ),
     vimEvent: new Event(
         [
             new DisplayTextStep('Bienvenue dans la maison de vim.', false, 1),
-            new DisplayTextStep('Ho non, la porte se ferme ! Te voila piegé !', false, 2),
-            new UserInputStep('Trouve comment sortir de là', {}, resp => {
+            new DisplayTextStep('La porte se referme! Te voilà piegé!', false, 2),
+            new UserInputStep('Trouve comment sortir de là.', {}, resp => {
                 if ([':wq', ':q!', ':q'].includes(resp)) {
                     return 3;
                 }
                 return 2;
             }),
-            new DisplayTextStep('Bravo, tu es sortie!', true),
+            new DisplayTextStep('Bravo, tu es sorti!', true),
         ],
         'vim',
         new PNJ('')
@@ -71,16 +71,15 @@ export const Game = {
             new DisplayTextStep('Vous êtes <em>MORT</em>', false, 1),
             new DisplayTextStep('<em>FIN DU JEU</em>', false, 2),
             new UserInputStep('Tapez <em>"rejouer"</em> pour recommencer', {}, resp => {
-                if (resp == "rejouer") {
+                if (resp == 'rejouer') {
                     return 3;
                 }
                 return 2;
             }),
-            new DisplayTextStep('NOUVELLE PARTIE', true)
-
+            new DisplayTextStep('NOUVELLE PARTIE', true),
         ],
         'cemetery',
-        new PNJ(''),
+        new PNJ('')
     ),
     sessionEvents: [],
     currentEvent: null,
