@@ -5,6 +5,7 @@ import { UserInputStep } from './steps/user_input_step';
 import { BackgroundService } from './services/background_service';
 import { PNJ } from './meetings/PNJ';
 import { AttackStep } from './steps/attack_step';
+import { Player } from './player';
 
 export const Game = {
     allEvents: [],
@@ -69,6 +70,7 @@ export const Game = {
     init: () => {
         Game.loadAllEvents();
         Game.pickCurrEvents();
+        Player.init();
     },
 
     loadAllEvents: () => {

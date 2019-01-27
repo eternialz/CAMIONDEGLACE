@@ -1,5 +1,6 @@
 import SceneController from './controllers/scene_controller';
 import UserInterfaceController from './controllers/user_interface_controller';
+import IndicatorController from './controllers/indicator_controller';
 
 const application = Stimulus.Application.start();
 
@@ -13,4 +14,5 @@ application.register(
 );
 
 application.register('scene', SceneController);
+application.register('indicator', IndicatorController);
 application.register('user-interface', UserInterfaceController);

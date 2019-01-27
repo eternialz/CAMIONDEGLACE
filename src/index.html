@@ -25,6 +25,16 @@
                     <input data-target="user-interface.command" type="text" name="text-input" data-action="keyup->user-interface#keyUp keydown->user-interface#keyDown" />
                 </div>
             </section>
+            <section id="indicator" data-controller="indicator">
+                <div class="icon">
+                    <img src="./assets/happiness_point.png"/>
+                    <span data-target="indicator.happiness"></span>
+                </div>
+                <div class="icon">
+                    <img src="./assets/health_point.png"/>
+                    <span data-target="indicator.health"></span>
+                </div>
+            </section>
         </main>  
     </body>
 </html>
