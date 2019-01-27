@@ -1,6 +1,13 @@
 html {
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
+    max-height: 725px;
+}
+
+body {
+    overflow: hidden;
+    max-height: 725px;
+    margin: 0;
 }
 
 *, *:before, *:after {
@@ -112,13 +119,6 @@ html {
 
 input[name="text-input"] {
     width: 100%;
-}
-
-body {
-    margin: 0;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
 }
 
 p {
