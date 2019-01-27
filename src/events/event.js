@@ -16,4 +16,9 @@ export class Event {
             }
         }
     }
+
+    reset() {
+        this.step = this.steps[0];
+        this.isFinished = false;
+    }
 }

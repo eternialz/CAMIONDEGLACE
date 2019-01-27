@@ -57,7 +57,7 @@ export const Game = {
         Game.allEvents.push(new Event([
             new DisplayTextStep("Bienvenue dans la maison de vim.", false, 1),
             new DisplayTextStep("Ho non, la porte se ferme ! Te voila piegé !", false, 2),
-            new UserInputStep("Trouve comment sortir de là", (resp) => {
+            new UserInputStep("Trouve comment sortir de là", {}, (resp) => {
                 if ([":wq", ":q!", ":q"].includes(resp)) {
                     return 3;
                 }
@@ -70,22 +70,34 @@ export const Game = {
     pickCurrEvents: () => {
         let shuffledEvents = ArrayHelper.shuffle(Game.allEvents);
         Game.sessionEvents = shuffledEvents.slice(0, Game.nbEvents);
-        Game.currentEvent = Game.startEvent;
-        BackgroundService.name = Game.currentEvent.background;
-        Game.currentEvent.step.display();
+        Game.changeGameEvent(Game.startEvent);
     },
     nextTick: () => {
         Game.currentEvent.nextStep();
         if (Game.currentEvent.isFinished) {
             if (Game.currentEventIndex < Game.nbEvents) {
-                Game.currentEvent = Game.sessionEvents[Game.currentEventIndex];
+                Game.changeGameEvent(Game.sessionEvents[Game.currentEventIndex]);
                 Game.currentEventIndex ++;
             }
             else {
-                Game.currentEvent = Game.endEvent;
+                if (Game.currentEvent != Game.endEvent) {
+                    // display end
+                    Game.changeGameEvent(Game.endEvent);
+                }
+                else {
+                    Game.startEvent.reset();
+                    Game.vimEvent.reset();
+                    Game.endEvent.reset();
+                    // start a new game 
+                    Game.allEvents = []
+                    Game.init();
+                }
             }
-            BackgroundService.name = Game.currentEvent.background;
-            Game.currentEvent.step.display();
         }
+    },
+    changeGameEvent: (event) => {
+        Game.currentEvent = event;
+        BackgroundService.name = event.background;
+        event.step.display();
     }
 };

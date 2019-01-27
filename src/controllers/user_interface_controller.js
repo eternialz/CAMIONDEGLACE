@@ -22,8 +22,11 @@ export default class UserInterfaceController extends Stimulus.Controller {
 
     refresh() {
         this.outputTarget.innerHTML = TextHistoryService.html;
-        // auto scroll to new message
-        this.outputTarget.scrollTop = this.outputTarget.scrollHeight;
+        if (TextHistoryService.newText) {
+            // auto scroll to new message
+            this.outputTarget.scrollTop = this.outputTarget.scrollHeight;
+            TextHistoryService.newText = false;
+        }
         Game.nextTick();
     }
 

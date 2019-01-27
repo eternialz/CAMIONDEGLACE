@@ -1,5 +1,6 @@
 export const TextHistoryService = {
     html: "",
+    newText: false,
     addText: (text, type = 'narator', name = "Héro") => {
         let html = ""
         if (type == 'narator') {
@@ -13,5 +14,6 @@ export const TextHistoryService = {
                     </div>`
         }
         TextHistoryService.html += html;
+        TextHistoryService.newText = true;
     },
 }
