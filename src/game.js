@@ -8,6 +8,9 @@ import { AttackStep } from './steps/attack_step';
 import { Player } from './player';
 import { SceneService } from './services/scene_service';
 import { TypeService } from './services/type_service';
+import { TalkStep } from './steps/talk_step';
+import { contentTracing } from 'electron';
+
 
 export const Game = {
     allEvents: [],
@@ -46,7 +49,60 @@ export const Game = {
             new DisplayTextStep('Bravo, tu es sorti!', true),
         ],
         'vim',
-        new PNJ('')
+        new PNJ('Maurice'),
+        './assets/music/purple_planet_music_-_cinematic_-_halo_effect.mp3',
+    ),
+    zombieEvent: new Event(
+        [
+            new TalkStep('Aeueueueueu Ahheueuueue Aaaaaaah', false, 'event', 1),
+            new TalkStep('Comment ça ?', false, 'hero', 2),
+            new TalkStep('Aeueueueueu Ahheueuueue Aaaaaaah', false, 'event', 3),
+            new UserInputStep(
+                'Le zombie n\'a pas l\'ai d\'être content de vous voir. Preferez vous fuir ou l\'afronter ?',
+                {},
+                resp => {
+                    if (resp == 'courir' || resp == 'fuir' || resp == 'disparaitre') {
+                        return 6;
+                    } else if (resp == 'afronter' || resp == 'frapper' || resp == 'attaquer') {
+                        return 4;
+                    }
+                    return 5;
+                }
+            ),
+            new AttackStep('Vous attaquez', false, [7, 4]),
+            new TalkStep('Le zombie n\’a pas aimer votre réaction ... vous etes mort', true, 'event', 5),
+            new TalkStep('Le zombie est trop long ... vous avez reussi a vous enfuire', true, 'event', 6),
+            new DisplayTextStep('Vous avancez vers le lieu suivant.', true),
+            new DisplayTextStep('Vous êtes mort... LOL!', true),
+        ],
+        'cemetery',
+        new PNJ('Zombie'),
+        './assets/music/purple_planet_music_-_cinematic_-_halo_effect.mp3',
+    ),
+    forestEvent: new Event(
+        [
+            new TalkStep('Bienvenu a la foret de la mort', false, 'event', 1),
+            new TalkStep('Mon premier se trouve à la campagne.', false, 'event', 2),
+            new TalkStep('On presse mon deuxième à la ferme.', false, 'event', 3),
+            new TalkStep('Les oiseaux fabriquent mon troisième.', false, 'event', 4),
+            new TalkStep('Mon quatrième est un pronom.', false, 'event', 5),
+            new UserInputStep(
+                'Entrez votre reponse',
+                {},
+                resp => {
+                    if (resp == 'foret' || resp == 'forêt') {
+                        return 7;
+                    }
+                    return 6;
+                }
+            ),
+            new TalkStep('Mauvaise reponse', false, 'event', 5),
+            new TalkStep('Bonne reponse', false, 'event', 8),
+            new DisplayTextStep('Vous avancez vers le lieu suivant.', true),
+        ],
+        'forest',
+        new PNJ('aventurier'),
+        './assets/music/purple_planet_music_-_cinematic_-_halo_effect.mp3',
     ),
     endEvent: new Event(
         [
@@ -84,7 +140,7 @@ export const Game = {
     sessionEvents: [],
     currentEvent: null,
     currentEventIndex: 0,
-    nbEvents: 1, // To adjust after
+    nbEvents: 2, // To adjust after
     init: () => {
         Game.loadAllEvents();
         Game.pickCurrEvents();
@@ -92,19 +148,14 @@ export const Game = {
     },
 
     loadAllEvents: () => {
+        /*Game.allEvents.push(
+            Game.vimEvent,
+        );*/
         Game.allEvents.push(
-            new Event(
-                [
-                    new DisplayTextStep('Bienvenue dans la maison de vim.', false, 1),
-                    new DisplayTextStep('Ho non, la porte se ferme ! Te voila piegé !', false, 2),
-                    new AttackStep('Vous attaquez', false, [3, 2, 4]),
-                    new DisplayTextStep('Vous avancez vers le lieu suivant.', true),
-                    new DisplayTextStep('Vous êtes mort... LOL!', true),
-                ],
-                'cemetery',
-                new PNJ('Maurice'),
-                './assets/music/purple_planet_music_-_cinematic_-_halo_effect.mp3'
-            )
+            Game.zombieEvent,
+        );
+        Game.allEvents.push(
+            Game.forestEvent,
         );
     },
 
