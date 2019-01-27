@@ -26,11 +26,7 @@ export const Game = {
                     return 4;
                 }
             ),
-<<<<<<< Updated upstream
-            new DisplayTextStep("C'est parti!", true),
-=======
             new DisplayTextStep('En route!', true),
->>>>>>> Stashed changes
         ],
         'title-screen',
         new PNJ(''),
@@ -74,16 +70,15 @@ export const Game = {
             new DisplayTextStep('Vous êtes <em>MORT</em>', false, 1),
             new DisplayTextStep('<em>FIN DU JEU</em>', false, 2),
             new UserInputStep('Tapez <em>"rejouer"</em> pour recommencer', {}, resp => {
-                if (resp == "rejouer") {
+                if (resp == 'rejouer') {
                     return 3;
                 }
                 return 2;
             }),
-            new DisplayTextStep('NOUVELLE PARTIE', true)
-
+            new DisplayTextStep('NOUVELLE PARTIE', true),
         ],
         'cemetery',
-        new PNJ(''),
+        new PNJ('')
     ),
     sessionEvents: [],
     currentEvent: null,
