@@ -19,13 +19,17 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
     "electron": "^4.0.2",
+    "electron-packager": "^13.0.1",
     "node-sass": "^4.11.0",
     "sass": "^1.16.1"
   },
   "scripts": {
     "start": "babel src -d lib --copy-files && electron lib/main.js",
-    "build": "babel src -d lib",
-    "sass": "sass --watch ./styles:./lib/styles"
+    "build": "babel src -d lib --copy-files && sass ./styles:./lib/styles && cp package.json ./lib/package.json",
+    "sass": "sass --watch ./styles:./lib/styles",
+    "package-mac": "electron-packager ./lib/ Camiondeglace --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/128x128.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager ./lib/ Camiondeglace --overwrite --asar --platform=win32 --arch=ia32 --icon=assets/icons/128x128.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"CamionDeGlace\"",
+    "package-linux": "electron-packager ./lib/ Camiondeglace --overwrite --asar --platform=linux --arch=x64 --icon=assets/icons/128x128.png --prune=true --out=release-builds"
   },
   "repository": {
     "type": "git",
