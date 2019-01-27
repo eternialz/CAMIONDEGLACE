@@ -3,6 +3,7 @@ import { Event } from "./events/event";
 import { DisplayTextStep } from "./steps/display_text_step";
 import { UserInputStep } from "./steps/user_input_step";
 import { BackgroundService } from "./services/background_service";
+import { PNJ } from "./meetings/PNJ";
 
 export const Game = {
     allEvents:  [],
@@ -11,39 +12,42 @@ export const Game = {
         new DisplayTextStep("Quel glace veux-tu ?", false, 2),
         new DisplayTextStep("Ho non, tu n'as pas vu le temps passer, il faut maintenant très tard", false, 3),
         new DisplayTextStep("Il va falloir maintenant rentrer à la maison", false, 4),
-        new UserInputStep("Ce jeu est 100% textuel. Entrez jouer pour commencer, quitter si vous souhaitez quitter.", (resp) => {
+        new UserInputStep("Ce jeu est 100% textuel. Entrez jouer pour commencer, quitter si vous souhaitez quitter.", {}, (resp) => {
             if (resp == "jouer") {
                 return 5;
             }
             return 4;
         }),
         new DisplayTextStep("C'est partie!", true)
-    ], "mountain_volcano"),
+    ], "mountain_volcano",
+        new PNJ('')),
     vimEvent: new Event([
         new DisplayTextStep("Bienvenue dans la maison de vim.", false, 1),
         new DisplayTextStep("Ho non, la porte se ferme ! Te voila piegé !", false, 2),
-        new UserInputStep("Trouve comment sortir de là", (resp) => {
+        new UserInputStep("Trouve comment sortir de là", {}, (resp) => {
             if ([":wq", ":q!", ":q"].includes(resp)) {
                 return 3;
             }
             return 2;
         }),
         new DisplayTextStep("Bravo, tu es sortie!", true)
-    ], "vim"),
+    ], "vim",
+        new PNJ('')),
     endEvent: new Event([
         new DisplayTextStep("Félicitation", false, 1),
         new DisplayTextStep("Vous êtes de retour à la maison", false, 2),
         new DisplayTextStep("Et vous avez gagné ...", false, 3),
         new DisplayTextStep("une <em>fessé</em> de votre mère qui n'est pas contente et qui était <em>très inquiète</em>", false, 4),
-        new UserInputStep("Appuyez pour quitter ...", (resp) => {
+        new UserInputStep("Appuyez pour quitter ...", {}, (resp) => {
             return 5;
         }),
         new DisplayTextStep("Bye bye !!!", true)
-    ], "../.."),
+    ], "../..",
+        new PNJ('')),
     sessionEvents: [],
     currentEvent: null,
     currentEventIndex: 0,
-    nbEvents: 9, // Random guess: to adjust
+    nbEvents: 1, // To adjust after
     init: () => {
         Game.loadAllEvents();
         Game.pickCurrEvents();

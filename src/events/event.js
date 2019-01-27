@@ -1,9 +1,10 @@
 export class Event {
-    constructor(steps, background) {
+    constructor(steps, background, persona) {
         this.steps = steps;
         this.step = this.steps[0];
         this.isFinished = false;
         this.background = background;
+        this.persona = persona;
     }
 
     nextStep() {
