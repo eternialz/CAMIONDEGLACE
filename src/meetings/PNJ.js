@@ -1,9 +1,9 @@
 import { TextHistoryService } from '../services/text_history_service';
 
 export class PNJ {
-    constructor(name, damage = 20, asset = '../..') {
+    constructor(name, asset = '../..', damage = 20) {
         this.name = name;
-        this.health = 100;
+        this.health = 60;
         this.damage = damage;
         this.asset = asset;
     }

@@ -2,6 +2,7 @@ import { AttackStep } from '../steps/attack_step';
 import { Game } from '../game';
 import { TextHistoryService } from '../services/text_history_service';
 import { Player } from '../player';
+import { TypeService } from '../services/type_service';
 
 export class Event {
     constructor(steps, background, persona, music) {
@@ -31,8 +32,9 @@ export class Event {
                     Player.loseHealth(playerDamage);
                     if (Player.isDead()) {
                         clearInterval(Game.currentEvent.attackInterval);
+                        TypeService.type = "";
                         Game.currentEvent.attackInterval = null;
-                        Game.currentEvent = Game.endEvent;
+                        Game.changeGameEvent(Game.gameOverEvent);
                     }
                 }, 5000);
             } else if (!(this.step instanceof AttackStep) && this.attackInterval) {

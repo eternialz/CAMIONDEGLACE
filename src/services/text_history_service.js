@@ -30,7 +30,6 @@ export const TextHistoryService = {
             TextHistoryService.displayInterval = setInterval(() => {
                 if (TextHistoryService.waitingText.length > 0) {
                     let dialog = TextHistoryService.waitingText.shift();
-                    console.log(dialog);
                     TextHistoryService.addText(dialog.text, dialog.type, dialog.name);
 
                 } else {

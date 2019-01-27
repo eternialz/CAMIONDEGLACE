@@ -26,7 +26,7 @@ export const Game = {
                     return 4;
                 }
             ),
-            new DisplayTextStep("C'est partie!", true),
+            new DisplayTextStep("C'est parti!", true),
         ],
         'mountain_volcano',
         new PNJ(''),
@@ -57,17 +57,29 @@ export const Game = {
                 false,
                 4
             ),
-            new UserInputStep(
-                'Entrez <em>quitter</em> pour arrêter le jeu, autre chose pour reprendre ...',
-                {},
-                resp => {
-                    return 5;
-                }
-            ),
+            new UserInputStep('Entrez <em>quitter</em> pour arrêter le jeu, autre chose pour reprendre ...', {}, _ => {
+                return 5;
+            }),
             new DisplayTextStep('Bye bye !!!', true),
         ],
         'house',
         new PNJ('')
+    ),
+    gameOverEvent: new Event(
+        [
+            new DisplayTextStep('Vous êtes <em>MORT</em>', false, 1),
+            new DisplayTextStep('<em>FIN DU JEU</em>', false, 2),
+            new UserInputStep('Tapez <em>"rejouer"</em> pour recommencer', {}, resp => {
+                if (resp == "rejouer") {
+                    return 3;
+                }
+                return 2;
+            }),
+            new DisplayTextStep('NOUVELLE PARTIE', true)
+
+        ],
+        'cemetery',
+        new PNJ(''),
     ),
     sessionEvents: [],
     currentEvent: null,
@@ -108,13 +120,14 @@ export const Game = {
                 Game.changeGameEvent(Game.sessionEvents[Game.currentEventIndex]);
                 Game.currentEventIndex++;
             } else {
-                if (Game.currentEvent != Game.endEvent) {
+                if (Game.currentEvent != Game.endEvent && Game.currentEvent != Game.gameOverEvent) {
                     // display end
                     Game.changeGameEvent(Game.endEvent);
                 } else {
                     Game.startEvent.reset();
                     Game.vimEvent.reset();
                     Game.endEvent.reset();
+                    Game.gameOverEvent.reset();
                     // start a new game
                     Game.allEvents = [];
                     Game.init();
