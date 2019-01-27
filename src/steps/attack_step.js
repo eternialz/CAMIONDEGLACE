@@ -16,7 +16,7 @@ export class AttackStep extends Step {
         const currentPersona = Game.currentEvent.persona;
         this.random = StringHelper.randomString();
         TypeService.type = this.random;
-        t addTextHistoryService.addTextAsync(`${this.message} <em>${currentPersona.name}</em>!`);
+        TextHistoryService.addTextAsync(`${this.message} <em>${currentPersona.name}</em>!`);
         TextHistoryService.addTextAsync(`Entrez <em>${this.random}</em> pour attaquer!`);
     }
 
