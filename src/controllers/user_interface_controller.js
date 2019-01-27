@@ -1,10 +1,11 @@
 import { TextHistoryService } from '../services/text_history_service';
 import { Game } from '../game';
 import { Player } from '../player';
+import { TypeService } from '../services/type_service';
 const remote = require('electron').remote;
 
 export default class UserInterfaceController extends Stimulus.Controller {
-    static targets = ['command', 'output'];
+    static targets = ['command', 'output', 'type'];
     combatMode = false;
     updateTimer = null;
 
@@ -29,6 +30,10 @@ export default class UserInterfaceController extends Stimulus.Controller {
             this.outputTarget.scrollTop = this.outputTarget.scrollHeight;
             TextHistoryService.newText = false;
         }
+        if (TypeService.type && TypeService != '') {
+            this.typeTarget.innerHTML = '<span>' + TypeService.type + '</span>';
+        }
+
         Game.nextTick();
     }
 

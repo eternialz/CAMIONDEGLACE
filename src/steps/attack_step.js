@@ -3,6 +3,7 @@ import { StringHelper } from '../helpers/string-helper';
 import { Game } from '../game';
 import { Player } from '../player';
 import { TextHistoryService } from '../services/text_history_service';
+import { TypeService } from '../services/type_service';
 
 export class AttackStep extends Step {
     constructor(message, final, nextSteps) {
@@ -14,6 +15,8 @@ export class AttackStep extends Step {
     display() {
         const currentPersona = Game.currentEvent.persona;
         this.random = StringHelper.randomString();
+        console.log(this.random);
+        TypeService.type = this.random;
         TextHistoryService.addText(`${this.message} <em>${currentPersona.name}</em>!`);
         TextHistoryService.addText(`Entrez <em>${this.random}</em> pour attaquer!`);
     }
