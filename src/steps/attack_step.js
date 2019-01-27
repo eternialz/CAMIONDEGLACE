@@ -32,17 +32,7 @@ export class AttackStep extends Step {
             Player.resetHealth();
             this.nextStep = this.nextSteps[0];
         } else {
-            const playerDamage = (Math.floor(Math.random() * 20) / 20) * currentPersona.damage;
-            TextHistoryService.addText(`<em>${currentPersona.name}</em> vous attaque en retour!`);
-            TextHistoryService.addText(`Vous recevez <em>${playerDamage} dégats.</em>`);
-            Player.loseHealth(playerDamage);
-
-            if (Player.isDead()) {
-                // Reset Game
-                this.nextStep = this.nextSteps[2];
-            } else {
-                this.nextStep = this.nextSteps[1];
-            }
+            this.nextStep = this.nextSteps[1];
         }
     }
 }
