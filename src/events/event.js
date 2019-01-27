@@ -4,13 +4,18 @@ import { TextHistoryService } from '../services/text_history_service';
 import { Player } from '../player';
 
 export class Event {
-    constructor(steps, background, persona) {
+    constructor(steps, background, persona, music) {
         this.steps = steps;
         this.step = this.steps[0];
         this.isFinished = false;
         this.background = background;
         this.persona = persona;
         this.attackInterval;
+        if (music) {
+            this.music = new Audio(music);
+            this.music.loop = true;
+            this.music.preload = "auto";
+        }
     }
 
     nextStep() {

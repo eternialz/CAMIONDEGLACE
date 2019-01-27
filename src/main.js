@@ -16,5 +16,6 @@ function createWindow() {
     win.loadURL(`file://${__dirname}/index.html`);
     win.openDevTools();
 }
-
+// allow to play sound without interact
+app.commandLine.appendSwitch('--autoplay-policy','no-user-gesture-required');
 app.on('ready', createWindow);

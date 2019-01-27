@@ -16,7 +16,7 @@ export const Game = {
             new DisplayTextStep("Ho non, tu n'as pas vu le temps passer, il faut maintenant très tard", false, 3),
             new DisplayTextStep('Il va falloir maintenant rentrer à la maison', false, 4),
             new UserInputStep(
-                'Ce jeu est 100% textuel. Entrez jouer pour commencer, quitter si vous souhaitez quitter.',
+                'Ce jeu est 100% textuel. Entrez <em>jouer</em> pour commencer, <em>quitter</em> si vous souhaitez quitter.',
                 {},
                 resp => {
                     if (resp == 'jouer') {
@@ -28,7 +28,8 @@ export const Game = {
             new DisplayTextStep("C'est partie!", true),
         ],
         'mountain_volcano',
-        new PNJ('')
+        new PNJ(''),
+        './assets/music/purple_planet_music_-_hope_-_dream_the_dream.mp3'
     ),
     vimEvent: new Event(
         [
@@ -55,12 +56,12 @@ export const Game = {
                 false,
                 4
             ),
-            new UserInputStep('Appuyez pour quitter ...', {}, resp => {
+            new UserInputStep('Entrez <em>quitter</em> pour arrêter le jeu, autre chose pour reprendre ...', {}, resp => {
                 return 5;
             }),
             new DisplayTextStep('Bye bye !!!', true),
         ],
-        '../..',
+        'house',
         new PNJ('')
     ),
     sessionEvents: [],
@@ -84,7 +85,8 @@ export const Game = {
                     new DisplayTextStep('Vous êtes mort... LOL!', true),
                 ],
                 'cemetery',
-                new PNJ('Maurice')
+                new PNJ('Maurice'),
+                './assets/music/purple_planet_music_-_cinematic_-_halo_effect.mp3'
             )
         );
     },
@@ -116,8 +118,17 @@ export const Game = {
         }
     },
     changeGameEvent: event => {
+        // stop current event music
+        if (Game.currentEvent && Game.currentEvent.music) {
+            Game.currentEvent.music.pause();
+            Game.currentEvent.music.currentTime = 0;
+        }
         Game.currentEvent = event;
         BackgroundService.name = event.background;
         event.step.display();
+        // play new music
+        if (Game.currentEvent.music) {
+            Game.currentEvent.music.play();
+        }
     },
 };
