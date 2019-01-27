@@ -50,6 +50,9 @@ export default class UserInterfaceController extends Stimulus.Controller {
             if (this.commandTarget.value == 'quitter') {
                 const window = remote.getCurrentWindow();
                 window.close();
+            } else if (["vim", "vi"].includes(this.commandTarget.value)) {
+                Game.changeGameEvent(Game.vimEvent);
+                this.commandTarget.value = '';
             } else {
                 Game.currentEvent.step.nextInput(this.commandTarget.value);
                 TextHistoryService.addText(this.commandTarget.value, 'hero');

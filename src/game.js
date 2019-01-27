@@ -7,6 +7,7 @@ import { PNJ } from './meetings/PNJ';
 import { AttackStep } from './steps/attack_step';
 import { Player } from './player';
 import { SceneService } from './services/scene_service';
+import { TypeService } from './services/type_service';
 
 export const Game = {
     allEvents: [],
@@ -140,6 +141,11 @@ export const Game = {
         if (Game.currentEvent && Game.currentEvent.music) {
             Game.currentEvent.music.pause();
             Game.currentEvent.music.currentTime = 0;
+        }
+        if (Game.currentEvent && Game.currentEvent.attackInterval) {
+            clearInterval(Game.currentEvent.attackInterval);
+            Game.currentEvent.attackInterval = null;
+            TypeService.type = "";
         }
         Game.currentEvent = event;
         SceneService.personaAsset = event.persona.asset;
