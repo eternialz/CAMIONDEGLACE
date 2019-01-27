@@ -32,6 +32,8 @@ export default class UserInterfaceController extends Stimulus.Controller {
         }
         if (TypeService.type && TypeService != '') {
             this.typeTarget.innerHTML = '<span>' + TypeService.type + '</span>';
+        } else {
+            this.typeTarget.innerHTML = '';
         }
 
         Game.nextTick();
