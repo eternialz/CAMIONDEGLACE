@@ -26,6 +26,25 @@ body {
     background-image: url("../assets/mountain_volcano.png");
 }
 
+#hero, #persona {
+    position: absolute;
+    height: 200px;
+    top: 200px;
+
+    img {
+        max-height: 200px;
+    }
+}
+
+#hero {
+    left: 100px;
+}
+
+#persona {
+    transform: scaleX(-1);
+    right: 100px;
+}
+
 #text-output {
     height: 187px;
     background: #222;
@@ -90,6 +109,7 @@ body {
     padding: 5px;
     background: #333;
     position: relative;
+    overflow-y: scroll !important;
 
     &:after {
         position: absolute;

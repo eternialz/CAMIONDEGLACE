@@ -12,8 +12,18 @@
     </head>
     <body>
         <main>
-            <section id="scene" data-controller="scene" data-target="scene.scene" data-content-loader-refresh-interval="1000">
+            <section>
 
+                <section data-controller="scene" data-content-loader-refresh-interval="1000">
+
+                    <div id="scene" data-target="scene.scene"></div>
+                    <div id="hero" data-target="scene.hero">
+                        
+                    </div>
+                    <div id="persona" data-target="scene.persona">
+
+                    </div>
+                </section>
             </section>
             <section id="text-zone" data-controller="user-interface" data-content-loader-refresh-interval="1000">
                 <div id="text-type" data-target="user-interface.type">

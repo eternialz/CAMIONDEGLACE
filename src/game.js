@@ -6,6 +6,7 @@ import { BackgroundService } from './services/background_service';
 import { PNJ } from './meetings/PNJ';
 import { AttackStep } from './steps/attack_step';
 import { Player } from './player';
+import { SceneService } from './services/scene_service';
 
 export const Game = {
     allEvents: [],
@@ -56,9 +57,13 @@ export const Game = {
                 false,
                 4
             ),
-            new UserInputStep('Entrez <em>quitter</em> pour arrêter le jeu, autre chose pour reprendre ...', {}, resp => {
-                return 5;
-            }),
+            new UserInputStep(
+                'Entrez <em>quitter</em> pour arrêter le jeu, autre chose pour reprendre ...',
+                {},
+                resp => {
+                    return 5;
+                }
+            ),
             new DisplayTextStep('Bye bye !!!', true),
         ],
         'house',
@@ -124,6 +129,7 @@ export const Game = {
             Game.currentEvent.music.currentTime = 0;
         }
         Game.currentEvent = event;
+        SceneService.personaAsset = event.persona.asset;
         BackgroundService.name = event.background;
         event.step.display();
         // play new music
