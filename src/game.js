@@ -9,8 +9,8 @@ export const Game = {
     allEvents:  [],
     startEvent: new Event([
         new DisplayTextStep("Bienvenue dans le camion de glace.", false, 1),
-        new DisplayTextStep("Quel glace veux-tu ?", false, 2),
-        new DisplayTextStep("Ho non, tu n'as pas vu le temps passer, il faut maintenant très tard", false, 3),
+        new DisplayTextStep("Quelle glace veux-tu ?", false, 2),
+        new DisplayTextStep("Ho non, tu n'as pas vu le temps passer, il fait maintenant très tard", false, 3),
         new DisplayTextStep("Il va falloir maintenant rentrer à la maison", false, 4),
         new UserInputStep("Ce jeu est 100% textuel. Entrez jouer pour commencer, quitter si vous souhaitez quitter.", {}, (resp) => {
             if (resp == "jouer") {
@@ -18,7 +18,7 @@ export const Game = {
             }
             return 4;
         }),
-        new DisplayTextStep("C'est partie!", true)
+        new DisplayTextStep("C'est parti!", true)
     ], "mountain_volcano",
         new PNJ('')),
     vimEvent: new Event([
