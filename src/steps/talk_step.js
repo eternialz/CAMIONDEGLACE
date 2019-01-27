@@ -3,8 +3,8 @@ import { TextHistoryService } from "../services/text_history_service";
 import { Game } from "../game";
 
 export class TalkStep extends Step {
-    constructor(message, final, type, nextType = undefined) {
-        super(message, false, final, nextType);
+    constructor(message, final, type, nextStep = undefined) {
+        super(message, false, final, nextStep);
         this.type = type;
     }
 

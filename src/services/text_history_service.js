@@ -1,4 +1,6 @@
 export const TextHistoryService = {
+    waitingText: [],
+    displayInterval: null,
     html: "",
     newText: false,
     addText: (text, type = 'narator', name = "Héro") => {
@@ -16,4 +18,26 @@ export const TextHistoryService = {
         TextHistoryService.html += html;
         TextHistoryService.newText = true;
     },
+    addTextAsync: (text, type = 'narator', name = 'Héro') => {
+        const textExtended = {
+            text: text,
+            type: type,
+            name: name,
+        }
+        TextHistoryService.waitingText.push(textExtended);
+
+        if (!TextHistoryService.displayInterval) {
+            TextHistoryService.displayInterval = setInterval(() => {
+                if (TextHistoryService.waitingText.length > 0) {
+                    let dialog = TextHistoryService.waitingText.shift();
+                    console.log(dialog);
+                    TextHistoryService.addText(dialog.text, dialog.type, dialog.name);
+
+                } else {
+                    clearInterval(TextHistoryService.displayInterval);
+                    TextHistoryService.displayInterval = null;
+                }
+            }, 1500);
+        }
+    }
 }

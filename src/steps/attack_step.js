@@ -15,22 +15,21 @@ export class AttackStep extends Step {
     display() {
         const currentPersona = Game.currentEvent.persona;
         this.random = StringHelper.randomString();
-        console.log(this.random);
         TypeService.type = this.random;
-        TextHistoryService.addText(`${this.message} <em>${currentPersona.name}</em>!`);
-        TextHistoryService.addText(`Entrez <em>${this.random}</em> pour attaquer!`);
+        t addTextHistoryService.addTextAsync(`${this.message} <em>${currentPersona.name}</em>!`);
+        TextHistoryService.addTextAsync(`Entrez <em>${this.random}</em> pour attaquer!`);
     }
 
     nextInput(value) {
         const currentPersona = Game.currentEvent.persona;
         const score = StringHelper.compare(this.random, value);
         const damage = (score * Player.damage) / 100;
-        TextHistoryService.addText(`Vous faites <em>${damage} points</em> de dégats`);
+        TextHistoryService.addTextAsync(`Vous faites <em>${damage} points</em> de dégats`);
         currentPersona.health -= damage;
 
         if (currentPersona.isDead()) {
-            TextHistoryService.addText(`Vous avez <em>assassiner ${currentPersona.name}</em>.`);
-            TextHistoryService.addText(`Votre attaque de base s'améliore.`);
+            TextHistoryService.addTextAsync(`Vous avez <em>assassiner ${currentPersona.name}</em>.`);
+            TextHistoryService.addTextAsync(`Votre attaque de base s'améliore.`);
             Player.levelUp();
             Player.resetHealth();
             this.nextStep = this.nextSteps[0];
